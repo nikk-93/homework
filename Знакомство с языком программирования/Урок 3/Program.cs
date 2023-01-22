@@ -1,4 +1,40 @@
-﻿List<int> GetDigitsNumber(int number)
+﻿using Task;
+
+Dictionary<int, string> task = new()
+{
+    {1, "Найти кубы чисел от 1 до N"},
+    {2, "Найти сумму чисел от 1 до А"},
+    {3, "Возведите число А в натуральную степень B используя цикл"},
+    {4, "Подсчитать сумму цифр в числе"},
+    {5, "Написать программу вычисления произведения чисел от 1 до N"},
+    {6, "Показать кубы чисел, заканчивающихся на четную цифру"},
+    {7, "Задать массив из 8 элементов, заполненных нулями и единицами вывести их на экран"},
+    {8, "Определить, присутствует ли в заданном массиве, некоторое число"},
+    {9, "Задать массив, заполнить случайными положительными трёхзначными числами. Показать количество нечетных/четных чисел"},
+    {10, "В одномерном массиве из 123 чисел найти количество элементов из отрезка [10,99]"},
+    {11, "Найти сумму чисел одномерного массива стоящих на нечетной позиции"},
+    {12, "Найти произведение пар чисел в одномерном массиве. Парой считаем первый и последний элемент, второй и предпоследний и т.д."},
+    {13, "В Указанном массиве вещественных чисел найдите разницу между максимальным и минимальным элементом"},
+};
+
+Dictionary<int, MethodHandler> taskMethod = new()
+{
+    {1, CallTask1},
+    {2, CallTask2},
+    {3, CallTask3},
+    {4, CallTask4},
+    {5, CallTask5},
+    {6, CallTask6},
+    {7, CallTask7},
+    {8, CallTask8},
+    {9, CallTask9},
+    {10, CallTask10},
+    {11, CallTask11},
+    {12, CallTask12},
+    {13, CallTask13},
+};
+
+List<int> GetDigitsNumber(int number)
 {
     int num = number;
     List<int> digits = new List<int>();
@@ -30,65 +66,15 @@ while (true)
 
     WriteTittle();
 
-    switch (Console.ReadLine() ?? "")
+    string str = Console.ReadLine() ?? "0";
+    if (!(int.TryParse(str, out int select) && task.ContainsKey(select) && taskMethod.TryGetValue(select, out var method)))
     {
-        case "1":
-            // 1. Найти кубы чисел от 1 до N
-            CallTask1();
-            break;
-        case "2":
-            // 2. Найти сумму чисел от 1 до А
-            CallTask2();
-            break;
-        case "3":
-            // 3. Возведите число А в натуральную степень B используя цикл
-            CallTask3();
-            break;
-        case "4":
-            // 4. Подсчитать сумму цифр в числе
-            CallTask4();
-            break;
-        case "5":
-            // 5. Написать программу вычисления произведения чисел от 1 до N
-            CallTask5();
-            break;
-        case "6":
-            // 6. Показать кубы чисел, заканчивающихся на четную цифру
-            CallTask6();
-            break;
-        case "7":
-            // 7. Задать массив из 8 элементов, заполненных нулями и единицами вывести их на экран
-            CallTask7();
-            break;
-        case "8":
-            // 8. Определить, присутствует ли в заданном массиве, некоторое число
-            CallTask8();
-            break;
-        case "9":
-            // 9. Задать массив, заполнить случайными положительными трёхзначными числами. Показать количество нечетных\четных чисел
-            CallTask9();
-            break;
-        case "10":
-            // 10.В одномерном массиве из 123 чисел найти количество элементов из отрезка [10,99]
-            CallTask10();
-            break;
-        case "11":
-            // 11.Найти сумму чисел одномерного массива стоящих на нечетной позиции
-            CallTask11();
-            break;
-        case "12":
-            // 12. Найти произведение пар чисел в одномерном массиве. Парой считаем первый и последний элемент, второй и предпоследний и т.д.
-            CallTask12();
-            break;
-        case "13":
-            // 13. В Указанном массиве вещественных чисел найдите разницу между максимальным и минимальным элементом
-            CallTask13();
-            break;
-        default:
-            Console.WriteLine("Выход...");
-            Console.ReadKey();
-            return;
+        Console.WriteLine("Выход...");
+        Console.ReadKey();
+        return;
     }
+
+    method();
 
     Console.WriteLine("Для продолжения нажмите любую клавишу...");
     Console.ReadKey();
@@ -96,26 +82,17 @@ while (true)
 
 void WriteTittle()
 {
-    Console.WriteLine("\n1. Найти кубы чисел от 1 до N");
-    Console.WriteLine("\n2. Найти сумму чисел от 1 до А");
-    Console.WriteLine("\n3. Возведите число А в натуральную степень B используя цикл");
-    Console.WriteLine("\n4. Подсчитать сумму цифр в числе");
-    Console.WriteLine("\n5. Написать программу вычисления произведения чисел от 1 до N");
-    Console.WriteLine("\n6. Показать кубы чисел, заканчивающихся на четную цифру");
-    Console.WriteLine("\n7. Задать массив из 8 элементов, заполненных нулями и единицами вывести их на экран");
-    Console.WriteLine("\n8. Определить, присутствует ли в заданном массиве, некоторое число");
-    Console.WriteLine("\n9. Задать массив, заполнить случайными положительными трёхзначными числами. Показать количество нечетных/четных чисел");
-    Console.WriteLine("\n10. В одномерном массиве из 123 чисел найти количество элементов из отрезка [10,99]");
-    Console.WriteLine("\n11. Найти сумму чисел одномерного массива стоящих на нечетной позиции");
-    Console.WriteLine("\n12. Найти произведение пар чисел в одномерном массиве. Парой считаем первый и последний элемент, второй и предпоследний и т.д.");
-    Console.WriteLine("\n13. В Указанном массиве вещественных чисел найдите разницу между максимальным и минимальным элементом");
+    foreach (var item in task)
+    {
+        Console.WriteLine($"{item.Key}. {item.Value}");
+    }
     Console.WriteLine();
     Console.Write("Выберите задание: ");
 }
 
 void CallTask1()
 {
-    Console.WriteLine("\n1. Найти кубы чисел от 1 до N");
+    Console.WriteLine(task[1]);
 
     Console.Write("Введите число: ");
     int number = int.Parse(Console.ReadLine() ?? "0");
@@ -128,7 +105,7 @@ void CallTask1()
 
 void CallTask2()
 {
-    Console.WriteLine("\n2. Найти сумму чисел от 1 до А");
+    Console.WriteLine(task[2]);
 
     int sum = 0;
     Console.Write("Введите число: ");
@@ -144,7 +121,7 @@ void CallTask2()
 
 void CallTask3()
 {
-    Console.WriteLine("\n3. Возведите число А в натуральную степень B используя цикл");
+    Console.WriteLine(task[3]);
 
     int res = 1;
     Console.Write("Введите число: ");
@@ -162,7 +139,7 @@ void CallTask3()
 
 void CallTask4()
 {
-    Console.WriteLine("\n4. Подсчитать сумму цифр в числе");
+    Console.WriteLine(task[4]);
 
     int sum = 0;
     Console.Write("Введите число: ");
@@ -180,7 +157,7 @@ void CallTask4()
 
 void CallTask5()
 {
-    Console.WriteLine("\n5. Написать программу вычисления произведения чисел от 1 до N");
+    Console.WriteLine(task[5]);
 
     int res = 1;
     Console.Write("Введите число: ");
@@ -196,7 +173,7 @@ void CallTask5()
 
 void CallTask6()
 {
-    Console.WriteLine("\n6. Показать кубы чисел, заканчивающихся на четную цифру");
+    Console.WriteLine(task[6]);
 
     Console.Write("Введите число: ");
     int number = int.Parse(Console.ReadLine() ?? "0");
@@ -210,7 +187,7 @@ void CallTask6()
 
 void CallTask7()
 {
-    Console.WriteLine("\n7. Задать массив из 8 элементов, заполненных нулями и единицами вывести их на экран");
+    Console.WriteLine(task[7]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -227,7 +204,7 @@ void CallTask7()
 
 void CallTask8()
 {
-    Console.WriteLine("\n8. Определить, присутствует ли в заданном массиве, некоторое число");
+    Console.WriteLine(task[8]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -255,7 +232,7 @@ void CallTask8()
 
 void CallTask9()
 {
-    Console.WriteLine("\n9. Задать массив, заполнить случайными положительными трёхзначными числами. Показать количество нечетных/четных чисел");
+    Console.WriteLine(task[9]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -283,7 +260,7 @@ void CallTask9()
 
 void CallTask10()
 {
-    Console.WriteLine("\n10. В одномерном массиве из 123 чисел найти количество элементов из отрезка [10,99]");
+    Console.WriteLine(task[10]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -313,7 +290,7 @@ void CallTask10()
 
 void CallTask11()
 {
-    Console.WriteLine("\n11. Найти сумму чисел одномерного массива стоящих на нечетной позиции");
+    Console.WriteLine(task[11]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -339,7 +316,7 @@ void CallTask11()
 
 void CallTask12()
 {
-    Console.WriteLine("\n12. Найти произведение пар чисел в одномерном массиве. Парой считаем первый и последний элемент, второй и предпоследний и т.д.");
+    Console.WriteLine(task[12]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
@@ -362,7 +339,7 @@ void CallTask12()
 
 void CallTask13()
 {
-    Console.WriteLine("\n13. В Указанном массиве вещественных чисел найдите разницу между максимальным и минимальным элементом");
+    Console.WriteLine(task[13]);
 
     Console.Write("Введите размер массива: ");
     int n = int.Parse(Console.ReadLine() ?? "0");
