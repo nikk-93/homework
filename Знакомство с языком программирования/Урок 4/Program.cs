@@ -96,7 +96,7 @@ void CallTask2()
 
     for (int i = 0; i < n; i++)
     {
-        if (i % 2 != 0) sumUnevenIndex += arr[i];
+        if ((i + 1) % 2 != 0) sumUnevenIndex += arr[i];
     }
 
     Console.WriteLine($"Сумма {sumUnevenIndex}");
@@ -124,7 +124,7 @@ void CallTask3()
     for (int i = 0; i < n; i++)
     {
         if (maxNum < arr[i]) maxNum = arr[i];
-        if (minNum < arr[i]) minNum = arr[i];
+        if (minNum > arr[i]) minNum = arr[i];
     }
 
     Console.WriteLine($"Max: {maxNum}, Min: {minNum}, Разница: {maxNum - minNum}");
