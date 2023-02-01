@@ -5,6 +5,8 @@ Dictionary<int, string> task = new()
     {1, "Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве."},
     {2, "Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях."},
     {3, "Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива."},
+    {4, "Найти точку пересечения двух прямых заданных уравнением y = k1 * x + b1, y = k2 * x + b2, b1 k1 и b2 и k2 заданы"},
+    {5, "Написать программу масштабирования фигуры"},
 };
 
 Dictionary<int, MethodHandler> taskMethod = new()
@@ -12,6 +14,8 @@ Dictionary<int, MethodHandler> taskMethod = new()
     {1, CallTask1},
     {2, CallTask2},
     {3, CallTask3},
+    {4, CallTask4},
+    {5, CallTask5},
 };
 
 while (true)
@@ -122,4 +126,63 @@ void CallTask3()
     }
 
     Console.WriteLine($"Max: {maxNum}, Min: {minNum}, Разница: {maxNum - minNum}");
+}
+
+void CallTask4()
+{
+    Console.WriteLine(task[4]);
+
+    Console.Write("Введите k1: ");
+    var k1 = double.Parse(Console.ReadLine()!);
+    Console.Write("Введите b1: ");
+    var b1 = double.Parse(Console.ReadLine()!);
+
+    Console.Write("Введите k2: ");
+    var k2 = double.Parse(Console.ReadLine()!);
+    Console.Write("Введите b2: ");
+    var b2 = double.Parse(Console.ReadLine()!);
+
+    if (k1 == k2)
+        if (b1 == b2)
+            Console.WriteLine("Прямые одинаковы");
+        else
+            Console.WriteLine("Прямые не пересекаются");
+    else
+    {
+        var x = (b2 - b1) / (k1 - k2);
+        var y = k1 * x + b1;
+
+        Console.WriteLine($"Прямые пересекаются в точке ({x},{y})");
+    }
+}
+
+void CallTask5()
+{
+    Console.WriteLine(task[5]);
+
+    Console.Write("Введите вершины фигуры: ");
+    var split = Console.ReadLine()!.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    Console.Write("Введите коэф: ");
+    var k = double.Parse(Console.ReadLine()!);
+
+    var coords = new (double, double)[split.Length];
+
+    for (int i = 0; i < split.Length; i++)
+    {
+        var point = split[i].Split(new char[] { '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
+        coords[i] = (double.Parse(point[0]), double.Parse(point[1]));
+    }
+
+    for (int i = 0; i < coords.Length; i++)
+    {
+        coords[i].Item1 *= k;
+        coords[i].Item2 *= k;
+    }
+
+    for (int i = 0; i < coords.Length; i++)
+    {
+        Console.Write($"({coords[i].Item1},{coords[i].Item2})");
+    }
+
+    Console.WriteLine();
 }
