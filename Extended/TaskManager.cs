@@ -41,6 +41,7 @@ namespace Extended
             {
                 Console.WriteLine($"{item.Key}. {item.Value.GetName()}");
             }
+            Console.WriteLine($"Для выхода нажмите любую другую клавишу...");
             Console.WriteLine();
             Console.Write("Выберите задание: ");
         }
