@@ -385,7 +385,7 @@ namespace Extended
 
                 for (int c = 0; c <= i; c++)
                 {
-                    s += " " + BinomialCoefficient(i, c) + " ";
+                    s += $"{BinomialCoefficient(i, c),5}";
                 }
 
                 Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
