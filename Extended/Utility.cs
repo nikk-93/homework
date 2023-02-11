@@ -416,5 +416,21 @@ namespace Extended
             }
             return ans;
         }
+
+        public static int SumArithmeticProgression(int n, int m)
+        {
+            return (m - n + 1) * (n + m) / 2;
+        }
+
+        public static int AckermannFunction(int m, int n)
+        {
+            if (m == 0)
+                return n + 1;
+
+            if (n == 0)
+                return AckermannFunction(m - 1, 1);
+            else
+                return AckermannFunction(m - 1, AckermannFunction(m, n - 1));
+        }
     }
 }
